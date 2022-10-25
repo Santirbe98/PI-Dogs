@@ -27,10 +27,10 @@ router.get("/:id", async (req, res, next) => {
     );
     // Dependiendo de donde encuentre el perro manda el correspondiente en formato json
     if (filterDogApi) {
-      res.status(200).json(filterDogApi);
+      return res.status(200).json(filterDogApi);
     }
     if (filterDogDB) {
-      res.status(200).json(filterDogDB);
+      return res.status(200).json(filterDogDB);
     }
     // Si no encuentra el perro envia un 404 con un texto diciendo que el perro no existe
     res.status(404).send(`Dog doesn't exist`);
@@ -40,7 +40,23 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  // const { id, name, height, weight, life_span, breed_group, image } = req.body;
+  const { name, height, weight, life_span, breed_group, image } = req.body;
+  if (!name || !height || !weight) {
+    return res.status(400).send(`Bad Request`);
+  }
+  try {
+    const newDog = await Dog.create({
+      name: name.toString(),
+      height: height,
+      weight: weight,
+      life_span: life_span,
+      breed_group: breed_group,
+      image: image,
+    });
+    return res.status(201).send(`The dog was created successfully`);
+  } catch (error) {
+    next();
+  }
 });
 
 module.exports = router;

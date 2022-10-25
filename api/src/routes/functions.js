@@ -23,8 +23,8 @@ const infoApi = async () => {
   return dogsApi;
 };
 
+// Con el FindAll traigo todos los "Dog" que hayan sido ingresados mediante el formulario, en caso de que falle tiro el error con su mensaje
 const infoDog_DB = async () => {
-  // Con el FindAll traigo todos los "Dog" que hayan sido ingresados mediante el formulario, en caso de que falle tiro el error con su mensaje
   try {
     const dogDb = await Dog.findAll();
     return dogDb;
@@ -33,8 +33,32 @@ const infoDog_DB = async () => {
   }
 };
 
+// Lo mismo que la funcion infoDog_DB pero con temperament
 const infoTemperament_DB = async () => {
-  // Lo mismo que la funcion infoDog_DB pero con temperament
+  //   // Filtro solamente los dogs que tiene la propiedad temperament
+  //   const dogsWithTemperament = allDogs.Api_Dogs.filter((t) => t.temperament);
+  //   // Hago un split por cada propiedad temperament de Dog
+  //   const temperamentArraymap = dogsWithTemperament.map((t) =>
+  //     t.temperament.split(", ")
+  //   );
+  //   // Creo un nuevo array para guardar todos los temperamentos por separado
+  //   const arrayTemperament = [];
+  //   // El for lo que hace es pushear todos los elementos y convertirlos en un solo array
+  //   for (let i = 0; i < temperamentArraymap.length; i++) {
+  //     for (let j = 0; j < temperamentArraymap[i].length; j++) {
+  //       if (!(arrayTemperament[i] === temperamentArraymap[i][j])) {
+  //         arrayTemperament.push(temperamentArraymap[i][j]);
+  //       }
+  //     }
+  //   }
+  //   // la funcion reductora para eliminar datos repetidos
+  //   const resultArray = arrayTemperament.reduce((a, e) => {
+  //     if (!a.find((d) => d == e)) {
+  //       a.push(e);
+  //     }
+  //     return a;
+  //   }, []);
+
   try {
     const temperamentDb = await Temperament.findAll();
     return temperamentDb;
