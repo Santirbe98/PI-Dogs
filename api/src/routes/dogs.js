@@ -47,11 +47,11 @@ router.post("/", async (req, res, next) => {
   try {
     const newDog = await Dog.create({
       name: name.toString(),
-      height: height,
-      weight: weight,
-      life_span: life_span,
-      breed_group: breed_group,
-      image: image,
+      height: height.toString(),
+      weight: weight.toString(),
+      life_span: life_span.toString(),
+      breed_group: breed_group.toString(),
+      image: image.toString(),
     });
     return res.status(201).send(`The dog was created successfully`);
   } catch (error) {
