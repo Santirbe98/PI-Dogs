@@ -8,7 +8,7 @@ const infoApi = async () => {
     `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
   );
   // Mapeo todos los Dogs y devuelvo el array
-  const dogsApi = await apiUrl.data.map((dog) => {
+  let dogsApi = await apiUrl.data.map((dog) => {
     return {
       id: dog.id,
       name: dog.name,
@@ -20,45 +20,12 @@ const infoApi = async () => {
       image: dog.image.url,
     };
   });
+  const dogDb = await Dog.findAll();
+  dogsApi = [...dogsApi].concat(dogDb);
   return dogsApi;
 };
 
-// Con el FindAll traigo todos los "Dog" que hayan sido ingresados mediante el formulario, en caso de que falle tiro el error con su mensaje
-const infoDog_DB = async () => {
-  try {
-    const dogDb = await Dog.findAll();
-    return dogDb;
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-// Lo mismo que la funcion infoDog_DB pero con temperament
 const infoTemperament_DB = async () => {
-  //   // Filtro solamente los dogs que tiene la propiedad temperament
-  //   const dogsWithTemperament = allDogs.Api_Dogs.filter((t) => t.temperament);
-  //   // Hago un split por cada propiedad temperament de Dog
-  //   const temperamentArraymap = dogsWithTemperament.map((t) =>
-  //     t.temperament.split(", ")
-  //   );
-  //   // Creo un nuevo array para guardar todos los temperamentos por separado
-  //   const arrayTemperament = [];
-  //   // El for lo que hace es pushear todos los elementos y convertirlos en un solo array
-  //   for (let i = 0; i < temperamentArraymap.length; i++) {
-  //     for (let j = 0; j < temperamentArraymap[i].length; j++) {
-  //       if (!(arrayTemperament[i] === temperamentArraymap[i][j])) {
-  //         arrayTemperament.push(temperamentArraymap[i][j]);
-  //       }
-  //     }
-  //   }
-  //   // la funcion reductora para eliminar datos repetidos
-  //   const resultArray = arrayTemperament.reduce((a, e) => {
-  //     if (!a.find((d) => d == e)) {
-  //       a.push(e);
-  //     }
-  //     return a;
-  //   }, []);
-
   try {
     const temperamentDb = await Temperament.findAll();
     return temperamentDb;
@@ -70,16 +37,14 @@ const infoTemperament_DB = async () => {
 // Con esta funcion devuelvo un objeto con todos los dogs de la api y de la base de datos.
 const getAllDogs = async () => {
   try {
-    const apiDogs = await infoApi();
-    const dogsDb = await infoDog_DB();
+    const allDogs = await infoApi();
     const temperamentDb = await infoTemperament_DB();
     return {
-      DB_Dogs: dogsDb,
+      all_Dogs: allDogs,
       DB_Temperament: temperamentDb,
-      Api_Dogs: apiDogs,
     };
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
