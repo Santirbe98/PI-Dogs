@@ -29,19 +29,21 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const { name, height, weight, life_span, breed_group, image } = req.body;
+  const { name, height, weight, life_span, image, temperaments } = req.body;
   if (!name || !height || !weight) {
     return res.status(400).send(`Bad Request`);
   }
+  if(temperaments?.length === 0) return res.json({error: `Temperaments is required`})
+
   try {
     const newDog = await Dog.create({
       name: name.toString(),
       height: height.toString(),
       weight: weight.toString(),
       life_span: life_span.toString(),
-      breed_group: breed_group.toString(),
       image: image.toString(),
     });
+    newDog.addTemperament(temperaments);
     return res.status(201).send(`The dog was created successfully`);
   } catch (error) {
     next();

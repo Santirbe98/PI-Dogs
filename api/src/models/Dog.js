@@ -29,10 +29,6 @@ module.exports = (sequelize) => {
     life_span: {
       type: DataTypes.STRING,
     },
-    // Raza
-    breed_group: {
-      type: DataTypes.STRING,
-    },
     image: {
       type: DataTypes.STRING,
     },

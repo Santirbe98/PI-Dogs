@@ -12,7 +12,6 @@ const infoApi = async () => {
     return {
       id: dog.id,
       name: dog.name,
-      breed_group: dog.breed_group,
       life_span: dog.life_span,
       temperament: dog.temperament,
       weight: dog.weight.metric,
@@ -27,6 +26,20 @@ const infoApi = async () => {
 
 const infoTemperament_DB = async () => {
   try {
+    let temperamentApi = new Set();
+    const consultaApi = await axios.get(
+      `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+    );
+    consultaApi.data.forEach((temp) => {
+      let resultTempArray = temp.temperament
+        ? temp.temperament.split(", ")
+        : [];
+      resultTempArray.forEach((temp) => temperamentApi.add(temp));
+    });
+    const temperamentApiResult = Array.from(temperamentApi);
+    temperamentApiResult.forEach(async (e) => {
+      await Temperament.findOrCreate({ where: { name: e } });
+    });
     const temperamentDb = await Temperament.findAll();
     return temperamentDb;
   } catch (error) {
