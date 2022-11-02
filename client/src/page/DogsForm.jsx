@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { fetchTemperaments, createDog } from "../action/dogsActions";
+import { fetchTemperaments, createDog } from "../redux/action/dogsActions";
 
 const validate = (input) => {
   let errors = {};

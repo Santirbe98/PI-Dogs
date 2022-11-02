@@ -1,21 +1,8 @@
 import axios from "axios";
-export const SET_DOGS = "dogs/set";
-export const SET_TEMPERAMENT = "temperament/set";
-export const GET_DETAILS = "dogs/get/id";
-
-export function setDogs(value) {
-  return {
-    type: SET_DOGS,
-    payload: value,
-  };
-}
-
-export function setTemperaments(value) {
-  return {
-    type: SET_TEMPERAMENT,
-    payload: value,
-  };
-}
+export const SET_DOGS = "SET_DOGS";
+export const SET_TEMPERAMENT = "SET_TEMPERAMENT";
+export const GET_DETAILS = "GET_DETAILS";
+export const GET_NAME_DOG = "GET_NAME_DOG";
 
 export function fetchDogs() {
   return async function (dispatch) {
@@ -23,7 +10,7 @@ export function fetchDogs() {
       var allDogs = await axios.get(`http://localhost:3001/dogs`);
       return dispatch({
         type: SET_DOGS,
-        payload: allDogs.data.all_Dogs,
+        payload: allDogs.data,
       });
     } catch (err) {
       console.error(err);
@@ -57,6 +44,20 @@ export function fetchDogById(id) {
       });
     } catch {
       console.log("Try another ID");
+    }
+  };
+}
+
+export function fetchDogByName(name) {
+  return async function (dispatch) {
+    try {
+      const response = await axios(`http://localhost:3001/dogs?name=${name}`);
+      return dispatch({
+        type: GET_NAME_DOG,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(`Dog not found, try another name`);
     }
   };
 }

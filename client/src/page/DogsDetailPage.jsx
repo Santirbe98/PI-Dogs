@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchDogById } from "../action/dogsActions";
+import { fetchDogById } from "../redux/action/dogsActions";
 
-function DogsDetailPage(props) {
+function DogsDetailPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [dog, setDog] = useState({});
