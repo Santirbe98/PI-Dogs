@@ -5,9 +5,20 @@ const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
+    const { name } = req.query;
     // Llama a la funcion GetAllDogs que trae todos los perros
-    const allDogs = await getAllDogs();
-    res.status(200).json(allDogs);
+    const { all_Dogs } = await getAllDogs();
+
+    if (name) {
+      const dogFilter = await all_Dogs.filter((dog) =>
+        dog.name.toLowerCase().includes(name.toLowerCase())
+      );
+      dogFilter.length > 0
+        ? res.status(200).send(dogFilter)
+        : res.status(404).send(`Dog not found`);
+    } else {
+      return res.status(200).json(all_Dogs);
+    }
   } catch (error) {
     next();
   }
@@ -33,7 +44,8 @@ router.post("/", async (req, res, next) => {
   if (!name || !height || !weight) {
     return res.status(400).send(`Bad Request`);
   }
-  if(temperaments?.length === 0) return res.json({error: `Temperaments is required`})
+  if (temperaments?.length === 0)
+    return res.json({ error: `Temperaments is required` });
 
   try {
     const newDog = await Dog.create({
