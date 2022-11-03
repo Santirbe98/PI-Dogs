@@ -4,6 +4,8 @@ import { fetchDogs, fetchTemperaments } from "../redux/action/dogsActions";
 import { DogsCards } from "./DogsCards";
 import { Link } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
+import { Paginado } from "./Paginado";
+import s from "./styles/HomePage.module.css";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -11,16 +13,29 @@ function HomePage() {
   const temperaments = useSelector((state) => state.temperaments);
   const [temperament, setTemperamets] = useState("All");
 
+  //Paginado
+  const [currentPage, setCurrentPage] = useState(1);
+  const dogsCardsPerPage = 8; // Cuantos dogs va a renderizar por pagina
+  const numberOfLastDog = currentPage * dogsCardsPerPage;
+  const numberOfFirstDog = numberOfLastDog - dogsCardsPerPage;
+  const currentDogs = allDogs.slice(numberOfFirstDog, numberOfLastDog);
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  function paginadoPrev() {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  }
+
+  function paginadoNext() {
+    let lastPage = Math.ceil(allDogs.length / dogsCardsPerPage);
+    if (currentPage < lastPage) setCurrentPage(currentPage + 1);
+  }
+
   useEffect(() => {
     dispatch(fetchDogs());
     dispatch(fetchTemperaments());
   }, [dispatch]);
-
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(fetchDogs());
-    setTemperamets("All");
-  }
 
   return (
     <div>
@@ -30,7 +45,6 @@ function HomePage() {
       </div>
 
       <div>
-        <button onClick={(e) => handleClick(e)}> Reload dogs </button>
         <SearchBar />
       </div>
 
@@ -46,11 +60,21 @@ function HomePage() {
       </div>
 
       <br />
-
       <div>
-        {allDogs.length === 0
+        <Paginado
+          dogsCardsPerPage={dogsCardsPerPage}
+          allDogs={allDogs.length}
+          paginado={paginado}
+          paginadoPrev={paginadoPrev}
+          paginadoNext={paginadoNext}
+        />
+      </div>
+      <br />
+
+      <div className={s.dogsCards}>
+        {currentDogs.length === 0
           ? "aguarde un momento "
-          : allDogs?.map((el, index) => {
+          : currentDogs?.map((el, index) => {
               return (
                 <DogsCards
                   key={index}
@@ -62,6 +86,16 @@ function HomePage() {
                 />
               );
             })}
+      </div>
+      <br />
+      <div>
+        <Paginado
+          dogsCardsPerPage={dogsCardsPerPage}
+          allDogs={allDogs.length}
+          paginado={paginado}
+          paginadoPrev={paginadoPrev}
+          paginadoNext={paginadoNext}
+        />
       </div>
     </div>
   );

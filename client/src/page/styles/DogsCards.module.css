@@ -2,3 +2,26 @@
   max-width: 20%;
   max-height: 20%;
 }
+
+.card {
+  display: flex;
+  max-width: 30%;
+  max-height: 50%;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  border-radius: 5%;
+  background-color: sandybrown;
+}
+
+@media screen and (max-width: 1200px) {
+  .card {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    width: 90%;
+  }
+}
