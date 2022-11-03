@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { fetchTemperaments, createDog } from "../redux/action/dogsActions";
 
@@ -71,7 +71,7 @@ const validate = (input) => {
 export const DogsForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [temperaments, setTemperamets] = useState([]);
+  const temperaments = useSelector((state) => state.temperaments);
   const [errors, setErrors] = useState("");
   const [input, setInput] = useState({
     name: "",
@@ -85,9 +85,7 @@ export const DogsForm = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchTemperaments()).then((res) => {
-      setTemperamets(res.payload);
-    });
+    dispatch(fetchTemperaments());
   }, [dispatch]);
 
   function handleChange(e) {
@@ -202,7 +200,7 @@ export const DogsForm = () => {
         <div>
           <label>life_span: </label>
           <input
-            type="text"
+            type="number"
             placeholder="Life span"
             value={input.life_span}
             name="life_span"

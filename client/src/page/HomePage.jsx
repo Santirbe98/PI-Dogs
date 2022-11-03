@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchDogs, fetchTemperaments } from "../redux/action/dogsActions";
 import { DogsCards } from "./DogsCards";
 import { Link } from "react-router-dom";
@@ -7,28 +7,19 @@ import { SearchBar } from "./SearchBar";
 
 function HomePage() {
   const dispatch = useDispatch();
-  const [dogs, setAllDogs] = useState([]);
-  const [temperaments, setTemperamets] = useState([]);
+  const allDogs = useSelector((state) => state.dogs);
+  const temperaments = useSelector((state) => state.temperaments);
+  const [temperament, setTemperamets] = useState("All");
 
   useEffect(() => {
-    dispatch(fetchDogs()).then((res) => {
-      setAllDogs(res.payload);
-    });
-    dispatch(fetchTemperaments()).then((res) => {
-      setTemperamets(res.payload);
-    });
+    dispatch(fetchDogs());
+    dispatch(fetchTemperaments());
   }, [dispatch]);
 
   function handleClick(e) {
     e.preventDefault();
-    setAllDogs([]);
-    setTemperamets([]);
-    dispatch(fetchDogs()).then((res) => {
-      setAllDogs(res.payload);
-    });
-    dispatch(fetchTemperaments()).then((res) => {
-      setTemperamets(res.payload);
-    });
+    dispatch(fetchDogs());
+    setTemperamets("All");
   }
 
   return (
@@ -44,31 +35,22 @@ function HomePage() {
       </div>
 
       <br />
+      <div>
+        <select>
+          {temperaments.map((el, i) => (
+            <option value={el.id} key={el.id}>
+              {el.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      {/* <select>
-        {temperaments.map((el, i) => (
-          <option value={el.id} key={el.id}>
-            {el.name}
-          </option>
-        ))}
-      </select> */}
-
-      {/* {dogs.length
-        ? dogs.map((dog) => (
-            <DogsCards
-              id={dog.id}
-              name={dog.name}
-              temperament={dog.temperament}
-              image={dog.image}
-              key={dog.id}
-            />
-          ))
-        : "Aguarde un momento"} */}
+      <br />
 
       <div>
-        {dogs.length === 0
+        {allDogs.length === 0
           ? "aguarde un momento "
-          : dogs?.map((el, index) => {
+          : allDogs?.map((el, index) => {
               return (
                 <DogsCards
                   key={index}
@@ -76,6 +58,7 @@ function HomePage() {
                   name={el.name}
                   image={el.image}
                   temperament={el.temperament}
+                  temperaments={el.temperaments?.map((t) => t.name).join(", ")}
                 />
               );
             })}

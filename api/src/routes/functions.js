@@ -19,7 +19,17 @@ const infoApi = async () => {
       image: dog.image.url,
     };
   });
-  const dogDb = await Dog.findAll();
+  const dogDb = await Dog.findAll({
+    include: [
+      {
+        model: Temperament,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
   dogsApi = [...dogsApi].concat(dogDb);
   return dogsApi;
 };

@@ -22,14 +22,19 @@ function DogsDetailPage() {
         <div>
           <img src={dog.image} alt={dog.name} width="20%" height="20%" />
           <h2>{dog.name}</h2>
-          <h3>Temperaments: </h3>
-          <p>{dog.temperament}</p>
           <h3>Weight: </h3>
           <p>{dog.weight} Kg</p>
           <h3>Height: </h3>
           <p>{dog.height} Cm</p>
           <h3>Life Span: </h3>
           <p>{dog.life_span}</p>
+          <h4>
+            Temperament:
+            <br />
+            {Array.isArray(dog.temperaments)
+              ? dog.temperaments.map((e) => e.name).join(", ")
+              : dog.temperament}
+          </h4>
           <a href="/">
             <button>Return home</button>
           </a>
