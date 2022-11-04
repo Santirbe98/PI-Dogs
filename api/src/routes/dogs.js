@@ -40,8 +40,17 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const { name, height, weight, life_span, image, temperaments } = req.body;
-  if (!name || !height || !weight) {
+  const {
+    name,
+    maxHeight,
+    minHeight,
+    minWeight,
+    maxWeight,
+    life_span,
+    image,
+    temperaments,
+  } = req.body;
+  if (!name || !maxHeight || !minHeight || !minWeight || !maxWeight) {
     return res.status(400).send(`Bad Request`);
   }
   if (temperaments?.length === 0)
@@ -50,8 +59,10 @@ router.post("/", async (req, res, next) => {
   try {
     const newDog = await Dog.create({
       name: name.toString(),
-      height: height.toString(),
-      weight: weight.toString(),
+      maxHeight: maxHeight.toString(),
+      minHeight: minHeight.toString(),
+      minWeight: minWeight.toString(),
+      maxWeight: maxWeight.toString(),
       life_span: life_span.toString(),
       image: image.toString(),
     });

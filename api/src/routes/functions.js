@@ -14,8 +14,10 @@ const infoApi = async () => {
       name: dog.name,
       life_span: dog.life_span,
       temperament: dog.temperament,
-      weight: dog.weight.metric,
-      height: dog.height.metric,
+      minWeight: dog.weight.metric.slice(0, 2).replace(" ", ""),
+      maxWeight: dog.weight.metric.slice(4).replace(" ", ""),
+      minHeight: dog.height.metric.slice(0, 2).replace(" ", ""),
+      maxHeight: dog.height.metric.slice(4).replace(" ", ""),
       image: dog.image.url,
     };
   });
