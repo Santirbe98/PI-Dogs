@@ -144,9 +144,11 @@ export const DogsForm = () => {
           name: input.name,
           life_span: input.life_span,
           image: input.image,
-          weight: `${input.minWeight} - ${input.maxWeight} kg`,
-          height: `${input.minHeight} - ${input.maxHeight} Cm`,
-          temperament: input.temperament.map((t) => Number(t.id)),
+          maxHeight: input.maxHeight,
+          minHeight: input.minHeight,
+          maxWeight: input.maxWeight,
+          minWeight: input.minWeight,
+          temperaments: input.temperament.map((t) => Number(t.id)),
         })
       );
 

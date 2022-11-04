@@ -23,9 +23,13 @@ function DogsDetailPage() {
           <img src={dog.image} alt={dog.name} width="20%" height="20%" />
           <h2>{dog.name}</h2>
           <h3>Weight: </h3>
-          <p>{dog.weight} Kg</p>
+          <p>
+            {dog.minWeight} - {dog.maxWeight} Kg
+          </p>
           <h3>Height: </h3>
-          <p>{dog.height} Cm</p>
+          <p>
+            {dog.minHeight} - {dog.maxHeight} Cm
+          </p>
           <h3>Life Span: </h3>
           <p>{dog.life_span}</p>
           <h4>

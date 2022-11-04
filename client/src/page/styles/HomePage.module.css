@@ -4,3 +4,9 @@
   justify-content: space-around;
   flex-flow: wrap;
 }
+
+.img {
+  display: flex;
+  max-width: 30%;
+  max-height: 30%;
+}

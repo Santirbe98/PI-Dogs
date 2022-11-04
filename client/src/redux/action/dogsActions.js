@@ -1,15 +1,19 @@
 import axios from "axios";
-export const SET_DOGS = "SET_DOGS";
-export const SET_TEMPERAMENT = "SET_TEMPERAMENT";
+export const GET_DOGS = "GET_DOGS";
+export const GET_TEMPERAMENT = "GET_TEMPERAMENT";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_NAME_DOG = "GET_NAME_DOG";
+export const FILTER_BY_TEMPERAMENTS = "FILTER_BY_TEMPERAMENTS";
+export const FILTER_CREATED = "FILTER_CREATED";
+export const FILTER_BY_NAME = "FILTER_BY_NAME";
+export const FILTER_BY_WEIGHT = "FILTER_BY_WEIGHT";
 
 export function fetchDogs() {
   return async function (dispatch) {
     try {
       var allDogs = await axios.get(`http://localhost:3001/dogs`);
       return dispatch({
-        type: SET_DOGS,
+        type: GET_DOGS,
         payload: allDogs.data,
       });
     } catch (err) {
@@ -25,7 +29,7 @@ export function fetchTemperaments() {
         `http://localhost:3001/temperament`
       );
       return dispatch({
-        type: SET_TEMPERAMENT,
+        type: GET_TEMPERAMENT,
         payload: allTemperaments.data,
       });
     } catch (err) {
@@ -70,5 +74,31 @@ export function createDog(payload) {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+
+export function filterByTemperaments(payload) {
+  return {
+    type: FILTER_BY_TEMPERAMENTS,
+    payload,
+  };
+}
+
+export function filterByName(payload) {
+  return {
+    type: FILTER_BY_NAME,
+    payload,
+  };
+}
+export function filterByWeight(payload) {
+  return {
+    type: FILTER_BY_WEIGHT,
+    payload,
+  };
+}
+export function filterCreated(payload) {
+  return {
+    type: FILTER_CREATED,
+    payload,
   };
 }

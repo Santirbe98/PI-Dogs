@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDogs, fetchTemperaments } from "../redux/action/dogsActions";
+import {
+  fetchDogs,
+  fetchTemperaments,
+  filterByTemperaments,
+  filterByName,
+  filterByWeight,
+  filterCreated,
+} from "../redux/action/dogsActions";
 import { DogsCards } from "./DogsCards";
 import { Link } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { Paginado } from "./Paginado";
 import s from "./styles/HomePage.module.css";
+import loading from "../img/dogrunning.gif";
 
 function HomePage() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
-  const temperaments = useSelector((state) => state.temperaments);
-  const [temperament, setTemperamets] = useState("All");
 
   //Paginado
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,6 +27,59 @@ function HomePage() {
   const currentDogs = allDogs.slice(numberOfFirstDog, numberOfLastDog);
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+  // Paginado
+
+  useEffect(() => {
+    dispatch(fetchDogs());
+    dispatch(fetchTemperaments());
+    dispatch(filterByTemperaments());
+  }, [dispatch]);
+
+  const temperaments = useSelector((state) => state.temperaments);
+  const [temperament, setTemperamets] = useState("All");
+
+  const handleSelectTemperament = (e) => {
+    e.preventDefault();
+    dispatch(filterByTemperaments(e.target.value));
+    setTemperamets(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(fetchDogs());
+    setTemperamets("All");
+    setCurrentPage(1);
+  };
+
+  const [filterWeight, setFilterWeight] = useState("");
+  const handleSortWeight = (e) => {
+    e.preventDefault();
+    if (e.target.value === "normal") {
+      dispatch(fetchDogs());
+    }
+    dispatch(filterByWeight(e.target.value));
+    setFilterWeight(e.target.value);
+    setCurrentPage(1);
+    setFilterName("");
+  };
+
+  const [filterName, setFilterName] = useState("");
+  const handleSortName = (e) => {
+    e.preventDefault();
+    dispatch(filterByName(e.target.value));
+    setFilterName(e.target.value);
+    setCurrentPage(1);
+    setFilterWeight("");
+  };
+
+  const [filterBreed, setFilterBreed] = useState("");
+  const handleSortBreed = (e) => {
+    e.preventDefault();
+    dispatch(filterCreated(e.target.value));
+    setFilterBreed(e.target.value);
+    setCurrentPage(1);
   };
 
   function paginadoPrev() {
@@ -32,62 +91,84 @@ function HomePage() {
     if (currentPage < lastPage) setCurrentPage(currentPage + 1);
   }
 
-  useEffect(() => {
-    dispatch(fetchDogs());
-    dispatch(fetchTemperaments());
-  }, [dispatch]);
-
   return (
     <div>
       <h1> Dogs page api | Dogs </h1>
+      {/* Nav */}
       <div>
-        <Link to="/create-dog">Create Dog</Link>
-      </div>
-
-      <div>
+        <button onClick={(e) => handleClick(e)}>Reset all dogs</button>
         <SearchBar />
+      </div>
+      <br />
+      {/* Form */}
+      <div>
+        <Link to="/create-dog">Create a new breed</Link>
       </div>
 
       <br />
+      {/* Filters */}
       <div>
-        <select>
-          {temperaments.map((el, i) => (
-            <option value={el.id} key={el.id}>
-              {el.name}
+        <span> Filter by temperament </span>
+        <select
+          value={temperament}
+          onChange={(e) => handleSelectTemperament(e)}
+        >
+          <option value="all"> All </option>
+          {temperaments.map((temp, index) => (
+            <option onClick={(e) => handleClick(e)} key={index}>
+              {temp.name}
             </option>
           ))}
+        </select>
+
+        <span> Sort by weight </span>
+        <select value={filterWeight} onChange={(e) => handleSortWeight(e)}>
+          <option value="normal"> ----- </option>
+          <option value="asc"> Lightest </option>
+          <option value="desc"> Heaviest</option>
+        </select>
+
+        <span> Sort by breed </span>
+        <select value={filterBreed} onChange={(e) => handleSortBreed(e)}>
+          <option value="all"> All </option>
+          <option value="api"> Api </option>
+          <option value="created"> Created </option>
+        </select>
+
+        <span> Sort by name </span>
+        <select value={filterName} onChange={(e) => handleSortName(e)}>
+          <option value="az"> A - Z </option>
+          <option value="za"> Z - A</option>
         </select>
       </div>
 
       <br />
-      <div>
-        <Paginado
-          dogsCardsPerPage={dogsCardsPerPage}
-          allDogs={allDogs.length}
-          paginado={paginado}
-          paginadoPrev={paginadoPrev}
-          paginadoNext={paginadoNext}
-        />
-      </div>
-      <br />
+      {/* Cards */}
 
       <div className={s.dogsCards}>
-        {currentDogs.length === 0
-          ? "aguarde un momento "
-          : currentDogs?.map((el, index) => {
-              return (
-                <DogsCards
-                  key={index}
-                  id={el.id}
-                  name={el.name}
-                  image={el.image}
-                  temperament={el.temperament}
-                  temperaments={el.temperaments?.map((t) => t.name).join(", ")}
-                />
-              );
-            })}
+        {currentDogs.length === 0 ? (
+          <img src={loading} alt="loadingGif" className={s.img} />
+        ) : (
+          currentDogs?.map((el, index) => {
+            return (
+              <DogsCards
+                key={index}
+                id={el.id}
+                name={el.name}
+                image={el.image}
+                temperament={el.temperament}
+                temperaments={el.temperaments?.map((t) => t.name).join(", ")}
+                maxWeight={el.maxWeight}
+                minWeight={el.minWeight}
+              />
+            );
+          })
+        )}
       </div>
+
       <br />
+
+      {/* Paginado */}
       <div>
         <Paginado
           dogsCardsPerPage={dogsCardsPerPage}
@@ -97,6 +178,7 @@ function HomePage() {
           paginadoNext={paginadoNext}
         />
       </div>
+      <br />
     </div>
   );
 }
