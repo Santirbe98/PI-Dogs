@@ -4,12 +4,14 @@ import HomePage from "./page/HomePage";
 import DogsDetailPage from "./page/DogsDetailPage";
 import { DogsForm } from "./page/DogsForm";
 import { Error404 } from "./page/Error404";
+import { LandingPage } from "./page/LandingPage";
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/home" component={HomePage} />
         <Route exact path="/dogs/:id" component={DogsDetailPage} />
         <Route exact path="/create-dog" component={DogsForm} />
         <Route exact path="*" component={Error404} />

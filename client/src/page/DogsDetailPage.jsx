@@ -39,7 +39,7 @@ function DogsDetailPage() {
               ? dog.temperaments.map((e) => e.name).join(", ")
               : dog.temperament}
           </h4>
-          <a href="/">
+          <a href="/home">
             <button>Return home</button>
           </a>
         </div>

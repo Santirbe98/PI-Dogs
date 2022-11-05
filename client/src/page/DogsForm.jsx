@@ -163,7 +163,7 @@ export const DogsForm = () => {
         image: "",
         temperament: [],
       });
-      history.push("/");
+      history.push("/home");
     } else {
       alert("incomplete or wrong information");
       e.preventDefault();
