@@ -6,16 +6,15 @@ export const DogsCards = (props) => {
     props;
   return (
     <div className={s.card}>
-      <br />
       <img src={image} alt={name} className={s.resize} />
-      <h4>{temperaments ? temperaments : temperament}</h4>
-      <h3>Weight: </h3>
+      <h4>
+        <Link to={`/dogs/${id}`}>{name}</Link>
+      </h4>
+      <h5>{temperaments ? temperaments : temperament}</h5>
+      <h5>Weight: </h5>
       <p>
         {minWeight} - {maxWeight} Kg
       </p>
-      <h3>
-        <Link to={`/dogs/${id}`}>{name}</Link>
-      </h3>
     </div>
   );
 };
