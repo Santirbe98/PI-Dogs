@@ -140,10 +140,12 @@ function HomePage() {
         </div>
 
         <br />
-        {/* Cards and Paginado*/}
         <div className={s.searchBar}>
           <SearchBar />
         </div>
+
+        {/* Cards */}
+
         <div className={s.dogsCards}>
           <br />
           {currentDogs.length === 0 ? (
@@ -165,6 +167,7 @@ function HomePage() {
             })
           )}
         </div>
+        <br />
         <div>
           <Paginado
             dogsCardsPerPage={dogsCardsPerPage}
