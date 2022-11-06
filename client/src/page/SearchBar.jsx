@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDogByName } from "../redux/action/dogsActions";
+import s from "./styles/SearchBar.module.css";
 
 export const SearchBar = () => {
   const [name, setName] = useState("");
@@ -23,7 +24,7 @@ export const SearchBar = () => {
   }
 
   return (
-    <div>
+    <div className={s.container}>
       <input
         type="text"
         placeholder="Search dog breed"

@@ -1,12 +1,25 @@
-.dogsCards {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-flow: wrap;
+.conteiner {
+  border-style: solid;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
-.img {
+.dogsCards {
   display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+}
+
+.loading {
+  display: flex;
+  justify-self: center;
   max-width: 30%;
   max-height: 30%;
 }

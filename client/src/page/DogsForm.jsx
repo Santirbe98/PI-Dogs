@@ -14,7 +14,7 @@ const validate = (input) => {
     !input.maxWeight ||
     !input.minWeight
   ) {
-    errors.dataMissing = "Missing mandatory information";
+    errors.dataMissing = "Incomplete information";
   }
 
   if (parseInt(input.name)) {
@@ -215,7 +215,7 @@ export const DogsForm = () => {
         <br />
         {/* MaxHeight */}
         <div>
-          <label>Max height: </label>
+          <label>Max height (Cm): </label>
           <input
             type="number"
             min="0"
@@ -234,7 +234,7 @@ export const DogsForm = () => {
         <br />
         {/* MinHeight */}
         <div>
-          <label>Min height: </label>
+          <label>Min height (Cm): </label>
           <input
             type="number"
             min="0"
@@ -253,7 +253,7 @@ export const DogsForm = () => {
         <br />
         {/* MaxWeight */}
         <div>
-          <label>Max weight: </label>
+          <label>Max weight (Kg): </label>
           <input
             type="number"
             min="0"
@@ -272,7 +272,7 @@ export const DogsForm = () => {
         <br />
         {/* MinWeight */}
         <div>
-          <label>Min weight: </label>
+          <label>Min weight (Kg): </label>
           <input
             type="number"
             min="0"

@@ -96,8 +96,7 @@ function HomePage() {
       <div>
         <button onClick={(e) => handleClick(e)}>Reset all dogs</button>
       </div>
-      <div>
-        <h1> Dogs page api | Dogs </h1>
+      <div className={s.conteiner}>
         {/* Nav */}
 
         <br />
@@ -142,11 +141,13 @@ function HomePage() {
 
         <br />
         {/* Cards and Paginado*/}
-        <div className={s.dogsCards}>
+        <div className={s.searchBar}>
           <SearchBar />
+        </div>
+        <div className={s.dogsCards}>
           <br />
           {currentDogs.length === 0 ? (
-            <img src={loading} alt="loadingGif" className={s.img} />
+            <img src={loading} alt="loadingGif" className={s.loading} />
           ) : (
             currentDogs?.map((el, index) => {
               return (
@@ -163,17 +164,15 @@ function HomePage() {
               );
             })
           )}
-          <footer>
-            <div>
-              <Paginado
-                dogsCardsPerPage={dogsCardsPerPage}
-                allDogs={allDogs.length}
-                paginado={paginado}
-                paginadoPrev={paginadoPrev}
-                paginadoNext={paginadoNext}
-              />
-            </div>
-          </footer>
+        </div>
+        <div>
+          <Paginado
+            dogsCardsPerPage={dogsCardsPerPage}
+            allDogs={allDogs.length}
+            paginado={paginado}
+            paginadoPrev={paginadoPrev}
+            paginadoNext={paginadoNext}
+          />
         </div>
       </div>
     </div>

@@ -7,9 +7,9 @@ export const DogsCards = (props) => {
   return (
     <div className={s.card}>
       <img src={image} alt={name} className={s.resize} />
-      <h4>
+      <h5>
         <Link to={`/dogs/${id}`}>{name}</Link>
-      </h4>
+      </h5>
       <h5>{temperaments ? temperaments : temperament}</h5>
       <h5>Weight: </h5>
       <p>

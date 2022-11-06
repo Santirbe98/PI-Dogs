@@ -1,17 +1,14 @@
 .resize {
-  max-width: 200px;
-  max-height: 200px;
+  height: 40%;
+  width: 100%;
 }
 
 .card {
+  font-size: smaller;
   display: flex;
-  width: 20%;
-  height: 40%;
-  align-items: center;
-  justify-items: center;
-  flex-direction: row;
-  flex-flow: wrap;
+  width: 12rem;
+  height: 18rem;
+  flex-flow: row wrap;
   margin: 10px;
-  border-radius: 5%;
   border-style: solid;
 }
