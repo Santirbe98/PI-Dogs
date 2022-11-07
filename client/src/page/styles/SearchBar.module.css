@@ -1,3 +1,37 @@
 .container {
-  color: red;
+  margin: 2% 0 2% 25%;
+}
+
+.input {
+  width: 100%;
+  height: 30px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f3f3f4;
+  color: #0d0c22;
+  transition: 0.3s ease;
+}
+
+.input::placeholder {
+  color: #9e9ea7;
+}
+
+.input:focus,
+input:hover {
+  outline: none;
+  border-color: #fffd5b;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.icon {
+  position: absolute;
+  width: 18rem;
+  height: 1rem;
+  top: 3.25rem;
+  fill: #9e9ea7;
 }

@@ -96,78 +96,81 @@ function HomePage() {
       <div>
         <button onClick={(e) => handleClick(e)}>Reset all dogs</button>
       </div>
-      <div className={s.conteiner}>
-        {/* Nav */}
+      <div className={s.container}>
+        {/* SearchBar */}
 
-        <br />
-        {/* Filters and Form */}
-        <div>
-          <span> Filter by temperament </span>
-          <select
-            value={temperament}
-            onChange={(e) => handleSelectTemperament(e)}
-          >
-            <option value="all"> All </option>
-            {temperaments.map((temp, index) => (
-              <option onClick={(e) => handleClick(e)} key={index}>
-                {temp.name}
-              </option>
-            ))}
-          </select>
+        <div className={s.searchBar}>
+          <SearchBar setCurrentPage={setCurrentPage} />
+        </div>
 
-          <span> Sort by weight </span>
-          <select value={filterWeight} onChange={(e) => handleSortWeight(e)}>
-            <option value="normal"> ----- </option>
-            <option value="asc"> Lightest </option>
-            <option value="desc"> Heaviest</option>
-          </select>
-
-          <span> Sort by breed </span>
-          <select value={filterBreed} onChange={(e) => handleSortBreed(e)}>
-            <option value="all"> All </option>
-            <option value="api"> Api </option>
-            <option value="created"> Created </option>
-          </select>
-
-          <span> Sort by name </span>
-          <select value={filterName} onChange={(e) => handleSortName(e)}>
-            <option value="az"> A - Z </option>
-            <option value="za"> Z - A</option>
-          </select>
-          <div>
-            <Link to="/create-dog">Create a new breed</Link>
+        <div className={s.cardFilterContainer}>
+          {/* Filters and Form */}
+          <div className={s.filters}>
+            <span> Filter by temperament </span>
+            <select
+              value={temperament}
+              onChange={(e) => handleSelectTemperament(e)}
+            >
+              <option value="all"> All </option>
+              {temperaments.map((temp, index) => (
+                <option onClick={(e) => handleClick(e)} key={index}>
+                  {temp.name}
+                </option>
+              ))}
+            </select>
+            <br />
+            <span> Sort by weight </span>
+            <select value={filterWeight} onChange={(e) => handleSortWeight(e)}>
+              <option value="normal"> ----- </option>
+              <option value="asc"> Lightest </option>
+              <option value="desc"> Heaviest</option>
+            </select>
+            <br />
+            <span> Sort by breed </span>
+            <select value={filterBreed} onChange={(e) => handleSortBreed(e)}>
+              <option value="all"> All </option>
+              <option value="api"> Api </option>
+              <option value="created"> Created </option>
+            </select>
+            <br />
+            <span> Sort by name </span>
+            <select value={filterName} onChange={(e) => handleSortName(e)}>
+              <option value="az"> A - Z </option>
+              <option value="za"> Z - A</option>
+            </select>
+            <br />
+            <div className={s.buttonCreate}>
+              <Link to="/create-dog" style={{ textDecoration: "none" }}>
+                Create a new breed
+              </Link>
+            </div>
+          </div>
+          {/* Cards */}
+          <div className={s.dogsCards}>
+            <br />
+            {currentDogs.length === 0 ? (
+              <img src={loading} alt="loadingGif" className={s.loading} />
+            ) : (
+              currentDogs?.map((el, index) => {
+                return (
+                  <DogsCards
+                    key={index}
+                    id={el.id}
+                    name={el.name}
+                    image={el.image}
+                    temperament={el.temperament}
+                    temperaments={el.temperaments
+                      ?.map((t) => t.name)
+                      .join(", ")}
+                    maxWeight={el.maxWeight}
+                    minWeight={el.minWeight}
+                  />
+                );
+              })
+            )}
           </div>
         </div>
 
-        <br />
-        <div className={s.searchBar}>
-          <SearchBar />
-        </div>
-
-        {/* Cards */}
-
-        <div className={s.dogsCards}>
-          <br />
-          {currentDogs.length === 0 ? (
-            <img src={loading} alt="loadingGif" className={s.loading} />
-          ) : (
-            currentDogs?.map((el, index) => {
-              return (
-                <DogsCards
-                  key={index}
-                  id={el.id}
-                  name={el.name}
-                  image={el.image}
-                  temperament={el.temperament}
-                  temperaments={el.temperaments?.map((t) => t.name).join(", ")}
-                  maxWeight={el.maxWeight}
-                  minWeight={el.minWeight}
-                />
-              );
-            })
-          )}
-        </div>
-        <br />
         <div>
           <Paginado
             dogsCardsPerPage={dogsCardsPerPage}

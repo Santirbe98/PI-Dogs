@@ -1,20 +1,29 @@
 import { Link } from "react-router-dom";
-import s from "./styles/DogsCards.module.css";
+import "./styles/DogsCards.css";
 
 export const DogsCards = (props) => {
   const { name, temperament, image, id, temperaments, minWeight, maxWeight } =
     props;
   return (
-    <div className={s.card}>
-      <img src={image} alt={name} className={s.resize} />
-      <h5>
-        <Link to={`/dogs/${id}`}>{name}</Link>
-      </h5>
-      <h5>{temperaments ? temperaments : temperament}</h5>
-      <h5>Weight: </h5>
-      <p>
-        {minWeight} - {maxWeight} Kg
-      </p>
+    <div className="container">
+      <Link to={`/dogs/${id}`} style={{ textDecoration: "none" }}>
+        <div className="wrapperImg">
+          <img className="imgDog" src={image} alt={name} />
+        </div>
+
+        <div className="cardText">
+          <h2 className="cardTitle">{name}</h2>
+
+          <h4 className="cardSub">
+            Weight: {minWeight} - {maxWeight} Kg
+          </h4>
+          <div>
+            <p className="temp-wrapper">
+              {temperaments ? temperaments : temperament}
+            </p>
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };

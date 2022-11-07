@@ -1,15 +1,22 @@
-.conteiner {
-  border-style: solid;
-  margin-top: 10%;
-  margin-left: 5%;
-  margin-right: 5%;
+.container {
+  background: #619678;
+  opacity: 2;
+  display: grid;
+  justify-content: center;
+  margin: 0 0 0 50px;
+  width: 90%;
+  height: 70%;
+  border: 2px solid black;
+  border-radius: 20px;
 }
 
 .dogsCards {
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 80%;
+  gap: 40px;
   justify-content: center;
-  text-align: center;
 }
 
 .searchBar {
@@ -20,6 +27,28 @@
 .loading {
   display: flex;
   justify-self: center;
-  max-width: 30%;
-  max-height: 30%;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardFilterContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonCreate {
+  display: flex;
+  border: 1px solid #fffd5b;
+  border-radius: 20px;
+  width: 155px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffd5b;
+  color: black;
 }
