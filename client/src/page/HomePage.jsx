@@ -13,7 +13,8 @@ import { Link } from "react-router-dom";
 import { SearchBar } from "./SearchBar";
 import { Paginado } from "./Paginado";
 import s from "./styles/HomePage.module.css";
-import loading from "../img/dogrunning.gif";
+import loading from "../img/loading.gif";
+import logo from "../img/logo.png";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -93,8 +94,10 @@ function HomePage() {
 
   return (
     <div>
-      <div>
-        <button onClick={(e) => handleClick(e)}>Reset all dogs</button>
+      <div className={s.logoBar}>
+        <a href="http://localhost:3000/home" className={s.aBar}>
+          <img src={logo} alt="logo" style={{ width: "380px" }} />
+        </a>
       </div>
       <div className={s.container}>
         {/* SearchBar */}
@@ -140,7 +143,10 @@ function HomePage() {
             </select>
             <br />
             <div className={s.buttonCreate}>
-              <Link to="/create-dog" style={{ textDecoration: "none" }}>
+              <Link
+                to="/create-dog"
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 Create a new breed
               </Link>
             </div>

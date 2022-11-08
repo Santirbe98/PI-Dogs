@@ -6,14 +6,13 @@ body {
 .container {
   width: 150px;
   height: 220px;
-  background-color: #fffd5b;
+  background-color: #f8f363;
   border-radius: 8px;
   -webkit-box-shadow: 0px 0px 51px -18px rgb(48, 48, 48);
   -moz-box-shadow: 0px 0px 51px -18px rgb(48, 48, 48);
   box-shadow: 0px 0px 51px -18px rgb(48, 48, 48);
 }
 
-/* img de la Card */
 .imgDog {
   display: block;
   margin-left: auto;
@@ -27,23 +26,19 @@ body {
   transition: all ease-in-out 0.4s;
 }
 
-/* efecto de la img al hacer hover */
 .container:hover .imgDog {
   transform: scale(1.15);
 }
 
-/* wrapper de la img para que funcione bien el efecto */
 .wrapperImg {
   overflow: hidden;
 }
 
-/* efecto de hover al title */
 .container:hover .cardTitle {
   text-decoration: underline;
   text-decoration-color: rgb(141, 208, 26);
 }
 
-/* titulo tarjeta */
 .cardTitle {
   color: #201616;
   margin-top: 5px;
@@ -53,14 +48,12 @@ body {
   margin-left: 25px;
 }
 
-/* subtitulo peso */
 .cardSub {
   color: rgb(46, 46, 46);
   margin-left: 25px;
   margin-top: -10px;
 }
 
-/* texto temperamentos */
 .cardTemp {
   color: black;
   margin-top: -5px;
@@ -73,8 +66,9 @@ body {
   font-size: 10px;
 }
 
-.temp-wrapper {
+.tempWrapper {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin: 0 10px 0 10px;
 }

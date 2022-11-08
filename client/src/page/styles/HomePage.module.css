@@ -1,12 +1,10 @@
 .container {
-  background: #619678;
+  background: rgba(82, 142, 110, 0.9);
   opacity: 2;
   display: grid;
-  justify-content: center;
   margin: 0 0 0 50px;
   width: 90%;
   height: 70%;
-  border: 2px solid black;
   border-radius: 20px;
 }
 
@@ -14,21 +12,15 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 80%;
-  gap: 40px;
+  width: 75%;
+  gap: 20px;
   justify-content: center;
+  align-items: center;
 }
 
 .searchBar {
   display: flex;
   justify-content: center;
-}
-
-.loading {
-  display: flex;
-  justify-self: center;
-  max-width: 300px;
-  max-height: 300px;
 }
 
 .filters {
@@ -39,16 +31,35 @@
 .cardFilterContainer {
   display: flex;
   justify-content: space-around;
+  margin-left: 20px;
 }
 
 .buttonCreate {
   display: flex;
-  border: 1px solid #fffd5b;
+  border: 1px solid #f8f363;
   border-radius: 20px;
   width: 155px;
   height: 40px;
   align-items: center;
   justify-content: center;
-  background-color: #fffd5b;
+  background-color: #f8f363;
   color: black;
+}
+
+.loading {
+  width: 40%;
+  height: 90%;
+}
+
+.logoBar {
+  display: flex;
+  background-color: rgba(82, 142, 110);
+  height: 110px;
+  margin-bottom: 10%;
+}
+
+.aBar {
+  justify-content: center;
+  width: 100%;
+  margin-top: -46px;
 }

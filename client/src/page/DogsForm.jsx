@@ -2,19 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { fetchTemperaments, createDog } from "../redux/action/dogsActions";
+import s from "./styles/DogsForm.module.css";
+import iconArrow from "../img/iconArrowLeft.png";
 
 const validate = (input) => {
   let errors = {};
   let expression = /^[a-zA-Z ]+$/gm;
 
-  if (
-    !input.name ||
-    !input.maxHeight ||
-    !input.minHeight ||
-    !input.maxWeight ||
-    !input.minWeight
-  ) {
-    errors.dataMissing = "Incomplete information";
+  if (!input.name) {
+    errors.name = "Name is required";
+  }
+  if (!input.maxHeight || !input.minHeight) {
+    errors.height = "Height is required";
+  }
+  if (!input.maxWeight || !input.minWeight) {
+    errors.weight = "Weight is required";
+  }
+  if (!input.image) {
+    errors.image = "Image is required";
   }
 
   if (parseInt(input.name)) {
@@ -23,44 +28,23 @@ const validate = (input) => {
     errors.name = "Special caracters aren't supported";
   }
 
-  if (!input.image) {
-    errors.image = "Image is required";
-  }
-
   if (!input.life_span) {
     errors.life_span = "Life span is required";
   } else if (input.life_span > 20 || input.life_span < 1) {
-    errors.life_span = "Write a number beetwen 1 - 20";
+    errors.life_span = " life span must be in a number from 1 - 20";
   }
 
-  if (!input.minWeight) {
-    errors.minWeight = "Minimum weight is required";
-  } else if (Number(input.minWeight) <= 0 || Number(input.minWeight >= 100)) {
-    errors.minWeight = "Write a number beetwen 0 - 100";
+  if (Number(input.minWeight) <= 0 || Number(input.minWeight >= 100)) {
+    errors.minWeight = "Minimum heigh must be in a number from 0 - 100";
   }
-  if (!input.maxWeight) {
-    errors.maxWeight = "Maximum weight is required";
-  } else if (
-    Number(input.maxWeight) <= 0 ||
-    Number(
-      input.maxWeight < Number(input.minWeight) || Number(input.maxWeight > 150)
-    )
-  ) {
-    errors.maxWeight = "Write a number beetwen 0- 150";
+  if (Number(input.maxWeight) <= 0 || Number(input.maxWeight > 100)) {
+    errors.maxWeight = "Maximun weight must be in a number from 0 - 150";
   }
-  if (!input.minHeight) {
-    errors.minHeight = "Minimum height is required";
-  } else if (Number(input.minHeight) <= 0 || Number(input.minHeight) >= 150) {
-    errors.minHeight = "Write a number beetwen 0 - 150";
+  if (Number(input.minHeight) <= 0 || Number(input.minHeight) >= 100) {
+    errors.minHeight = "Minimun height must be in a number from 0 - 100";
   }
-  if (!input.maxHeight) {
-    errors.maxHeight = "Minimum height is required";
-  } else if (
-    Number(input.maxHeight) <= 0 ||
-    Number(input.maxHeight) < Number(input.minHeight) ||
-    Number(input.maxHeight) > 100
-  ) {
-    errors.maxHeight = "Write a number beetwen 0- 100";
+  if (Number(input.maxHeight) <= 0 || Number(input.maxHeight) > 100) {
+    errors.maxHeight = "Maximun height must be in a number from 0 - 100";
   }
   if (!input.temperament.length) {
     errors.temperament = "Select at least 1 temperament";
@@ -171,164 +155,185 @@ export const DogsForm = () => {
   }
 
   return (
-    <div>
-      <div>
-        <span>CREATE YOUR OWN BREED OF DOG</span>
+    <div className={s.container}>
+      <div className={s.back}>
+        <Link to="/home">
+          <img
+            src={iconArrow}
+            alt="Back"
+            height="50px"
+            width="50px"
+            style={{ marginLeft: "50px" }}
+          />
+        </Link>
+        <p className={s.return}>Return</p>
       </div>
+      <h2 className={s.title}>CREATE YOUR OWN BREED OF DOG</h2>
       <form
+        className={s.form}
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        {/* BreedName */}
-        <div>
+        {/* Titles */}
+        <div className={s.titles}>
           <label>Breed: </label>
-          <input
-            type="text"
-            placeholder="Breed name"
-            value={input.name}
-            name="name"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>
-            {(errors.dataMissing && (
-              <p className="error">{errors.dataMissing}</p>
-            )) ||
-              (errors.name && <p className="error">{errors.name}</p>)}
-          </div>
-        </div>
-        <br />
-        {/* life_span */}
-        <div>
           <label>life_span: </label>
-          <input
-            type="number"
-            placeholder="Life span"
-            value={input.life_span}
-            name="life_span"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>
-            {errors.life_span && <p className="error">{errors.life_span}</p>}
-          </div>
-        </div>
-        <br />
-        {/* MaxHeight */}
-        <div>
-          <label>Max height (Cm): </label>
-          <input
-            type="number"
-            min="0"
-            placeholder="Maximun height"
-            value={input.maxHeight}
-            name="maxHeight"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>
-            {(errors.dataMissing && (
-              <p className="error">{errors.dataMissing}</p>
-            )) ||
-              (errors.maxHeight && <p className="error">{errors.maxHeight}</p>)}
-          </div>
-        </div>
-        <br />
-        {/* MinHeight */}
-        <div>
-          <label>Min height (Cm): </label>
-          <input
-            type="number"
-            min="0"
-            placeholder="Minimum height"
-            value={input.minHeight}
-            name="minHeight"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>
-            {(errors.dataMissing && (
-              <p className="error">{errors.dataMissing}</p>
-            )) ||
-              (errors.minHeight && <p className="error">{errors.minHeight}</p>)}
-          </div>
-        </div>
-        <br />
-        {/* MaxWeight */}
-        <div>
-          <label>Max weight (Kg): </label>
-          <input
-            type="number"
-            min="0"
-            placeholder="Maximun weight"
-            value={input.maxWeight}
-            name="maxWeight"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>
-            {(errors.dataMissing && (
-              <p className="error">{errors.dataMissing}</p>
-            )) ||
-              (errors.maxWeight && <p className="error">{errors.maxWeight}</p>)}
-          </div>
-        </div>
-        <br />
-        {/* MinWeight */}
-        <div>
-          <label>Min weight (Kg): </label>
-          <input
-            type="number"
-            min="0"
-            placeholder="Minimum weight"
-            value={input.minWeight}
-            name="minWeight"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>
-            {(errors.dataMissing && (
-              <p className="error">{errors.dataMissing}</p>
-            )) ||
-              (errors.minWeight && <p className="error">{errors.minWeight}</p>)}
-          </div>
-        </div>
-        <br />
-        {/* Image */}
-        <div>
+          <label>Height (Cm): </label>
+          <label>Weight (Kg): </label>
           <label>Image: </label>
-          <input
-            type="URL"
-            placeholder="Url of image"
-            value={input.image}
-            name="image"
-            onChange={(e) => handleChange(e)}
-          />
-          <div>{errors.image && <p className="error">{errors.image}</p>}</div>
-        </div>
-        <br />
-        {/* Temperament */}
-        <div>
           <label>Temperaments: </label>
-          <select onChange={(e) => handleSelect(e)}>
-            {temperaments?.map((el, i) => (
-              <option value={`${el.id},${el.name}`} key={el.id}>
-                {el.name}
-              </option>
-            ))}
-          </select>
-          {errors.temperament && <p className="error">{errors.temperament}</p>}
+        </div>
+
+        {/* Inputs */}
+        <div className={s.inputs}>
+          {/* BreedName */}
+          <div style={{ width: "352px" }}>
+            <input
+              style={{ width: "352px" }}
+              type="text"
+              placeholder="Breed name"
+              value={input.name}
+              name="name"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <br />
+          {/* life_span */}
+          <div style={{ width: "352px" }}>
+            <input
+              style={{ width: "352px" }}
+              type="number"
+              placeholder="Life span"
+              value={input.life_span}
+              name="life_span"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <br />
+          <div className={s.heightDiv}>
+            {/* MaxHeight */}
+            <div>
+              <input
+                type="number"
+                min="0"
+                placeholder="Maximun height"
+                value={input.maxHeight}
+                name="maxHeight"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            {/* MinHeight */}
+            <div>
+              <input
+                type="number"
+                min="0"
+                placeholder="Minimum height"
+                value={input.minHeight}
+                name="minHeight"
+                onChange={(e) => handleChange(e)}
+                style={{ marginLeft: "10px" }}
+              />
+            </div>
+          </div>
+          <br />
+          <div className={s.weightDiv}>
+            {/* MaxWeight */}
+            <div>
+              <input
+                type="number"
+                min="0"
+                placeholder="Maximun weight"
+                value={input.maxWeight}
+                name="maxWeight"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <br />
+            {/* MinWeight */}
+            <div>
+              <input
+                type="number"
+                min="0"
+                placeholder="Minimum weight"
+                value={input.minWeight}
+                name="minWeight"
+                onChange={(e) => handleChange(e)}
+                style={{ marginLeft: "10px" }}
+              />
+            </div>
+          </div>
+          <br />
+          {/* Image */}
+          <div style={{ width: "352px" }}>
+            <input
+              style={{ width: "352px" }}
+              type="URL"
+              placeholder="Url of image"
+              value={input.image}
+              name="image"
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <br />
+          {/* Temperament */}
           <div>
-            {input.temperament.map((el, i) => (
-              <button key={el.id} type="reset" onClick={() => handleDelete(el)}>
-                {el.name} X
-              </button>
-            ))}
+            <select onChange={(e) => handleSelect(e)}>
+              {temperaments?.map((el, i) => (
+                <option value={`${el.id},${el.name}`} key={el.id}>
+                  {el.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
-        {/* Button sumbit */}
-        <div>
-          <button type="submit">Create breed</button>
-        </div>
-        <Link to="/">
-          <button> Go Back </button>
-        </Link>
       </form>
+
+      <div>
+        {input.temperament.map((el, i) => (
+          <button
+            className={s.buttonTemperament}
+            key={el.id}
+            type="reset"
+            onClick={() => handleDelete(el)}
+          >
+            {el.name} X
+          </button>
+        ))}
+        {errors.temperament && <p className="error">{errors.temperament}</p>}
+      </div>
+
+      <div className={s.submit}>
+        <button
+          className={s.buttonSubmit}
+          type="submit"
+          onClick={(e) => handleSubmit(e)}
+        >
+          Create breed
+        </button>
+      </div>
+      {/*Errors */}
+      <div className={s.errors}>
+        <ul>
+          {errors.name && <li className="error">{errors.name}</li>}
+
+          {errors.life_span && <li className="error">{errors.life_span}</li>}
+
+          {(errors.weight && <li className="error">{errors.weight}</li>) ||
+            (errors.maxWeight && (
+              <li className="error">*{errors.maxWeight}</li>
+            )) ||
+            (errors.minWeight && <li className="error">{errors.minWeight}</li>)}
+
+          {(errors.height && <li className="error">{errors.height}</li>) ||
+            (errors.maxHeight && (
+              <li className="error">{errors.maxHeight}</li>
+            )) ||
+            (errors.minHeight && <li className="error">{errors.minHeight}</li>)}
+
+          {errors.image && <li className="error">{errors.image}</li>}
+        </ul>
+      </div>
     </div>
   );
 };

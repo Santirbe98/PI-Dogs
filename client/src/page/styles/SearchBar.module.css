@@ -17,21 +17,20 @@
 }
 
 .input::placeholder {
-  color: #9e9ea7;
+  color: #0d0c22;
 }
 
 .input:focus,
 input:hover {
   outline: none;
-  border-color: #fffd5b;
+  border-color: #f8f363;
   background-color: #fff;
   box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
 }
 
 .icon {
   position: absolute;
-  width: 18rem;
+  width: 19rem;
   height: 1rem;
-  top: 3.25rem;
-  fill: #9e9ea7;
+  top: 15.5rem;
 }
