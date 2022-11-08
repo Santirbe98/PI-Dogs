@@ -54,8 +54,8 @@
 .logoBar {
   display: flex;
   background-color: rgba(82, 142, 110);
-  height: 110px;
-  margin-bottom: 10%;
+  height: 90px;
+  margin-bottom: 100px;
 }
 
 .aBar {
