@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;800;900&display=swap");
+body {
+  font-family: "Fira Sans", sans-serif;
+}
 .container {
   background: rgba(82, 142, 110, 0.9);
-  opacity: 2;
   display: grid;
   margin: 0 0 0 50px;
   width: 90%;
@@ -44,6 +47,11 @@
   justify-content: center;
   background-color: #f8f363;
   color: black;
+  transition: background-color 0.3s;
+}
+
+.buttonCreate:hover {
+  background-color: #f3f3f4;
 }
 
 .loading {
@@ -55,7 +63,7 @@
   display: flex;
   background-color: rgba(82, 142, 110);
   height: 90px;
-  margin-bottom: 100px;
+  margin-bottom: 90px;
 }
 
 .aBar {

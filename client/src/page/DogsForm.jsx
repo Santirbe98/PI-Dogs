@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import { fetchTemperaments, createDog } from "../redux/action/dogsActions";
 import s from "./styles/DogsForm.module.css";
 import iconArrow from "../img/iconArrowLeft.png";
+import linkedin from "../img/linkedinLogo.png";
+import github from "../img/githubLogo.png";
 
 const validate = (input) => {
   let errors = {};
@@ -333,6 +335,39 @@ export const DogsForm = () => {
 
           {errors.image && <li className="error">{errors.image}</li>}
         </ul>
+      </div>
+      <div className={s.footerPage}>
+        <div className={s.footerDiv}>
+          <p style={{ color: "white", paddingRight: "10px" }}>
+            Santiago Bonetto, 2022
+          </p>
+          <p
+            style={{ color: "white", fontSize: "1.5em", paddingRight: "10px" }}
+          >
+            •
+          </p>
+
+          <a href="https://www.linkedin.com/in/santiago-bonetto/">
+            <img
+              src={linkedin}
+              alt="logoLinkedin"
+              style={{ width: "30px", height: "30px", paddingRight: "10px" }}
+            />
+          </a>
+          <p
+            style={{ color: "white", fontSize: "1.5em", paddingRight: "10px" }}
+          >
+            •
+          </p>
+
+          <a href="https://github.com/Santirbe98/PI-Dogs">
+            <img
+              src={github}
+              alt="logogithub"
+              style={{ width: "30px", height: "30px" }}
+            />
+          </a>
+        </div>
       </div>
     </div>
   );

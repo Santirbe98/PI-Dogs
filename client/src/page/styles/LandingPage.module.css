@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap");
+body {
+  font-family: "Fira Sans", sans-serif;
+}
+
 .main {
   width: 100%;
   height: 100vh;
@@ -22,6 +27,12 @@ video {
   color: rgb(255, 255, 255);
 }
 
+.contentText {
+  font-size: 1.1em;
+  margin: 2rem auto;
+  width: 300px;
+}
+
 .overlay {
   position: absolute;
   top: 0;
@@ -29,4 +40,25 @@ video {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+}
+
+.buttonSubmit {
+  display: flex;
+  border: 1px solid rgba(82, 142, 110);
+  border-radius: 20px;
+  width: 200px;
+  height: 70px;
+  flex-flow: column wrap;
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: 900;
+  justify-content: center;
+  background-color: #f8f363;
+  color: #181111;
+  cursor: pointer;
+  transition: background-color 0.4s;
+}
+
+.buttonSubmit:hover {
+  background-color: #f7f6c8;
 }

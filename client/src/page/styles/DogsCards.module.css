@@ -11,6 +11,11 @@ body {
   -webkit-box-shadow: 0px 0px 51px -18px rgb(48, 48, 48);
   -moz-box-shadow: 0px 0px 51px -18px rgb(48, 48, 48);
   box-shadow: 0px 0px 51px -18px rgb(48, 48, 48);
+  transition: all ease-in-out 0.4s;
+}
+
+.container:hover {
+  background-color: #fffcb3;
 }
 
 .imgDog {
@@ -36,7 +41,7 @@ body {
 
 .container:hover .cardTitle {
   text-decoration: underline;
-  text-decoration-color: rgb(141, 208, 26);
+  text-decoration-color: rgb(255, 118, 88);
 }
 
 .cardTitle {

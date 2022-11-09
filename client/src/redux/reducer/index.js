@@ -71,11 +71,6 @@ export default function rootReducer(state = INITIAL_STATE, { type, payload }) {
           : state.dogs.sort((a, b) => {
               return a.maxWeight - b.maxWeight;
             });
-      if (payload === "normal") {
-        return {
-          ...state,
-        };
-      }
       return {
         ...state,
         dogs: filterByWeight,

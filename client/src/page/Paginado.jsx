@@ -6,6 +6,7 @@ export const Paginado = ({
   paginado,
   paginadoPrev,
   paginadoNext,
+  currentPage,
 }) => {
   const pageNumbers = [];
 
@@ -16,13 +17,21 @@ export const Paginado = ({
   return (
     <nav>
       <div className={s.paginationCenter}>
-        <div onClick={paginadoPrev}>«</div>
+        <div className={s.number} onClick={paginadoPrev}>
+          «
+        </div>
         {pageNumbers.map((number) => (
-          <div key={number} onClick={() => paginado(number)}>
+          <div
+            className={currentPage === number ? s.pageActual : s.number}
+            key={number}
+            onClick={() => paginado(number)}
+          >
             {number}
           </div>
         ))}
-        <div onClick={paginadoNext}>»</div>
+        <div className={s.number} onClick={paginadoNext}>
+          »
+        </div>
       </div>
     </nav>
   );

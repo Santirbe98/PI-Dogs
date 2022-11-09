@@ -184,6 +184,7 @@ function HomePage() {
             paginado={paginado}
             paginadoPrev={paginadoPrev}
             paginadoNext={paginadoNext}
+            currentPage={currentPage}
           />
         </div>
       </div>

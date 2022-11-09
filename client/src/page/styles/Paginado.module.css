@@ -2,6 +2,29 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  gap: 3px;
-  padding-bottom: 5px;
+  gap: 7px;
+  padding-bottom: 12px;
+  margin: 1% 0 0 22%;
+}
+
+.number {
+  width: 22px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  border-color: black;
+  background-color: #f8f363;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.pageActual {
+  background: #f3f3f4;
+  border-radius: 20px;
+  width: 24px;
+}
+
+.number:hover {
+  background-color: #f3f3f4;
 }

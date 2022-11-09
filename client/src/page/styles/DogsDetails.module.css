@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;800;900&display=swap");
+body {
+  font-family: "Fira Sans", sans-serif;
+}
+
+.background {
+  background: #f1efef;
+  height: 550px;
+}
+
+.back {
+  background-color: rgba(82, 142, 110);
+  height: 100px;
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.return {
+  font-size: 1.3em;
+  margin-left: 20px;
+  color: rgb(35, 35, 35);
+}
+
+.gifLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8%;
+}
+
+.container {
+  display: flex;
+  text-align: start;
+}
+
+.imgContainer {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  position: relative;
+}
+
+.imgDog {
+  background: linear-gradient(90deg, #fee140 0%, #fa709a 100%);
+  padding: 3px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 100%;
+  box-shadow: 0px 3px 5px rgb(143 143 143 / 50%);
+  transition: all ease-in-out 0.4s;
+}
+
+.imgDog:hover {
+  transform: scale(1.15);
+}
+
+.h2Decoration {
+  font-weight: 900;
+  font-size: 2.7em;
+  text-decoration: underline;
+  text-decoration-color: #fa709a;
+}
+
+.textWrapper {
+  display: inline-block;
+}
+
+.textItems {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 40%;
+  font-size: 1em;
+}
+
+.footerPage {
+  background-color: rgb(16, 28, 22);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerDiv {
+  text-align: center;
+  display: contents;
+}
