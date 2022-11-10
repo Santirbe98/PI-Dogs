@@ -15,6 +15,8 @@ import { Paginado } from "./Paginado";
 import s from "./styles/HomePage.module.css";
 import loading from "../img/loading.gif";
 import logo from "../img/logo.png";
+import linkedin from "../img/linkedinLogo.png";
+import github from "../img/githubLogo.png";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -37,8 +39,9 @@ function HomePage() {
     dispatch(filterByTemperaments());
   }, [dispatch]);
 
+  // Temperament filter
   const temperaments = useSelector((state) => state.temperaments);
-  const [temperament, setTemperamets] = useState("All");
+  const [temperament, setTemperamets] = useState("all");
 
   const handleSelectTemperament = (e) => {
     e.preventDefault();
@@ -46,14 +49,19 @@ function HomePage() {
     setTemperamets(e.target.value);
     setCurrentPage(1);
   };
+  // Temperament filter
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(fetchDogs());
-    setTemperamets("All");
+    setFilterName("az");
+    setFilterWeight("normal");
+    setFilterBreed("all");
+    setTemperamets("all");
     setCurrentPage(1);
   };
 
+  // Weight filter
   const [filterWeight, setFilterWeight] = useState("");
   const handleSortWeight = (e) => {
     e.preventDefault();
@@ -65,7 +73,9 @@ function HomePage() {
     setCurrentPage(1);
     setFilterName("");
   };
+  // Weight filter
 
+  // Name filter
   const [filterName, setFilterName] = useState("");
   const handleSortName = (e) => {
     e.preventDefault();
@@ -74,7 +84,9 @@ function HomePage() {
     setCurrentPage(1);
     setFilterWeight("");
   };
+  // Name filter
 
+  // Created or Api filter
   const [filterBreed, setFilterBreed] = useState("");
   const handleSortBreed = (e) => {
     e.preventDefault();
@@ -82,6 +94,7 @@ function HomePage() {
     setFilterBreed(e.target.value);
     setCurrentPage(1);
   };
+  // Created or Api filter
 
   function paginadoPrev() {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -98,16 +111,56 @@ function HomePage() {
         <a href="http://localhost:3000/home" className={s.aBar}>
           <img src={logo} alt="logo" style={{ width: "380px" }} />
         </a>
+        <div className={s.credits}>
+          <div className={s.footerDiv}>
+            <p style={{ color: "white", paddingRight: "10px" }}>
+              Santiago Bonetto, 2022
+            </p>
+            <p
+              style={{
+                color: "white",
+                fontSize: "1em",
+                paddingRight: "10px",
+              }}
+            >
+              •
+            </p>
+
+            <a href="https://www.linkedin.com/in/santiago-bonetto/">
+              <img
+                src={linkedin}
+                alt="logoLinkedin"
+                style={{ width: "30px", height: "30px", paddingRight: "10px" }}
+              />
+            </a>
+            <p
+              style={{
+                color: "white",
+                fontSize: "1em",
+                paddingRight: "10px",
+              }}
+            >
+              •
+            </p>
+
+            <a href="https://github.com/Santirbe98/PI-Dogs">
+              <img
+                src={github}
+                alt="logogithub"
+                style={{ width: "30px", height: "30px" }}
+              />
+            </a>
+          </div>
+        </div>
       </div>
       <div className={s.container}>
         {/* SearchBar */}
-
         <div className={s.searchBar}>
           <SearchBar setCurrentPage={setCurrentPage} />
         </div>
 
+        {/* Filters and Form */}
         <div className={s.cardFilterContainer}>
-          {/* Filters and Form */}
           <div className={s.filters}>
             <span> Filter by temperament </span>
             <select
@@ -151,6 +204,7 @@ function HomePage() {
               </Link>
             </div>
           </div>
+
           {/* Cards */}
           <div className={s.dogsCards}>
             <br />
@@ -177,6 +231,7 @@ function HomePage() {
           </div>
         </div>
 
+        {/* Paginado */}
         <div>
           <Paginado
             dogsCardsPerPage={dogsCardsPerPage}

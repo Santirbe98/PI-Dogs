@@ -11,7 +11,6 @@ body {
 .back {
   background-color: rgba(82, 142, 110);
   height: 100px;
-  font-family: "Rubik", sans-serif;
   display: flex;
   align-items: center;
 }
@@ -87,6 +86,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 94px;
 }
 
 .footerDiv {

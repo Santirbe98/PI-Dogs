@@ -1,0 +1,36 @@
+.container {
+  background-color: #f1efef;
+  height: 100vh;
+}
+
+.divCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgError {
+  height: 300px;
+  width: 350px;
+  border-radius: 5%;
+  margin-top: 50px;
+}
+
+.buttonCreate {
+  display: flex;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 155px;
+  height: 40px;
+  background-color: rgba(82, 142, 110);
+  color: black;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.buttonCreate:hover {
+  background-color: rgb(140, 255, 194);
+}

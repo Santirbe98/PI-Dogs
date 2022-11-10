@@ -2,6 +2,34 @@
 body {
   font-family: "Fira Sans", sans-serif;
 }
+.logoBar {
+  display: flex;
+  background-color: rgba(82, 142, 110);
+  height: 90px;
+  margin-bottom: 90px;
+}
+
+.aBar {
+  justify-content: center;
+  width: 100%;
+  margin-top: -46px;
+}
+
+.footerDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  scale: 0.8;
+  padding-top: 50px;
+}
+
+.credits {
+  display: contents;
+  text-align: center;
+}
+
 .container {
   background: rgba(82, 142, 110, 0.9);
   display: grid;
@@ -57,17 +85,4 @@ body {
 .loading {
   width: 40%;
   height: 90%;
-}
-
-.logoBar {
-  display: flex;
-  background-color: rgba(82, 142, 110);
-  height: 90px;
-  margin-bottom: 90px;
-}
-
-.aBar {
-  justify-content: center;
-  width: 100%;
-  margin-top: -46px;
 }
