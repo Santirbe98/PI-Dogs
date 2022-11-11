@@ -20,11 +20,11 @@
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const port = process.env.PORT || 5000;
-const {getAllDogs} = require('./src/routes/functions')
+const { getAllDogs } = require("./src/routes/functions");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  getAllDogs()
+conn.sync({ force: false }).then(() => {
+  getAllDogs();
   server.listen(port, () => {
     console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
