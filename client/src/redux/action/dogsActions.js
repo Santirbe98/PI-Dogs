@@ -62,6 +62,7 @@ export function fetchDogByName(name) {
       });
     } catch (error) {
       console.error(`Dog not found, try another name`);
+      alert(`Dog not found, try another name`);
     }
   };
 }

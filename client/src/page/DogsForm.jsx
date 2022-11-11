@@ -88,7 +88,8 @@ export const DogsForm = () => {
   }
 
   function handleSelect(e) {
-    if (input.temperament.includes(e.target.value)) {
+    if (input.temperament.find((t) => t.id === e.target.value.split(",")[0])) {
+      console.log({ input });
       alert("Already in the list");
     } else {
       setInput({
@@ -282,7 +283,7 @@ export const DogsForm = () => {
           <div>
             <select onChange={(e) => handleSelect(e)}>
               {temperaments?.map((el, i) => (
-                <option value={`${el.id},${el.name}`} key={el.id}>
+                <option value={`${el.id},${el.name}`} key={i}>
                   {el.name}
                 </option>
               ))}
@@ -295,7 +296,7 @@ export const DogsForm = () => {
         {input.temperament.map((el, i) => (
           <button
             className={s.buttonTemperament}
-            key={el.id}
+            key={i}
             type="reset"
             onClick={() => handleDelete(el)}
           >
