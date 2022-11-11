@@ -11,7 +11,7 @@ export const FILTER_BY_WEIGHT = "FILTER_BY_WEIGHT";
 export function fetchDogs() {
   return async function (dispatch) {
     try {
-      var allDogs = await axios.get(`http://localhost:3001/dogs`);
+      var allDogs = await axios.get(`https://srb-api-dogs.herokuapp.com/dogs`);
       return dispatch({
         type: GET_DOGS,
         payload: allDogs.data,
@@ -26,7 +26,7 @@ export function fetchTemperaments() {
   return async function (dispatch) {
     try {
       var allTemperaments = await axios.get(
-        `http://localhost:3001/temperament`
+        `https://srb-api-dogs.herokuapp.com/temperament`
       );
       return dispatch({
         type: GET_TEMPERAMENT,
@@ -41,7 +41,9 @@ export function fetchTemperaments() {
 export function fetchDogById(id) {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+      const response = await axios.get(
+        `https://srb-api-dogs.herokuapp.com/dogs/${id}`
+      );
       return dispatch({
         type: GET_DETAILS,
         payload: response.data,
@@ -55,7 +57,9 @@ export function fetchDogById(id) {
 export function fetchDogByName(name) {
   return async function (dispatch) {
     try {
-      const response = await axios(`http://localhost:3001/dogs?name=${name}`);
+      const response = await axios(
+        `https://srb-api-dogs.herokuapp.com/dogs?name=${name}`
+      );
       return dispatch({
         type: GET_NAME_DOG,
         payload: response.data,
@@ -70,7 +74,10 @@ export function fetchDogByName(name) {
 export function createDog(payload) {
   return async function (dispatch) {
     try {
-      const response = await axios.post("http://localhost:3001/dogs", payload);
+      const response = await axios.post(
+        "https://srb-api-dogs.herokuapp.com/dogs",
+        payload
+      );
       return response;
     } catch (error) {
       console.log(error);
