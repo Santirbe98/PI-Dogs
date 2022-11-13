@@ -108,7 +108,7 @@ function HomePage() {
   return (
     <div>
       <div className={s.logoBar}>
-        <a href="https://pi-dogs-silk.vercel.app/home" className={s.aBar}>
+        <a href="https://dogs-app-pi-one.vercel.app/home" className={s.aBar}>
           <img src={logo} alt="logo" style={{ width: "380px" }} />
         </a>
         <div className={s.credits}>
