@@ -126,7 +126,10 @@ function HomePage() {
               •
             </p>
 
-            <a href="https://www.linkedin.com/in/santiago-bonetto/">
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/in/santiago-bonetto/"
+            >
               <img
                 src={linkedin}
                 alt="logoLinkedin"
@@ -143,7 +146,7 @@ function HomePage() {
               •
             </p>
 
-            <a href="https://github.com/Santirbe98/PI-Dogs">
+            <a target="_blank" href="https://github.com/Santirbe98/PI-Dogs">
               <img
                 src={github}
                 alt="logogithub"
