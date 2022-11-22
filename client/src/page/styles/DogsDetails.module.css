@@ -5,7 +5,7 @@ body {
 
 .background {
   background: #f1efef;
-  height: 100vh;
+  height: 550px;
 }
 
 .back {
@@ -31,7 +31,6 @@ body {
 .container {
   display: flex;
   text-align: start;
-  margin-top: 5%;
 }
 
 .imgContainer {
