@@ -10,7 +10,6 @@ export const DogsCards = (props) => {
         <div className={s.wrapperImg}>
           <img className={s.imgDog} src={image} alt={name} />
         </div>
-
         <div className={s.cardText}>
           <h2 className={s.cardTitle}>{name}</h2>
 
